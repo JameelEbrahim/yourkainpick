@@ -1,140 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Your Kain Pick — set the budget, get a Filipino food pick.">
-  <title>Your Kain Pick — Pick your kain</title>
-  <style>
-    :root{--primary:#F97316;--primary-dark:#EA580C;--background:#FFF7ED;--white:#fff;--text:#1C1917;--muted:#78716C;--yellow:#FACC15;--success:#16A34A;--light:#FED7AA;--line:#E7E5E4;--radius:20px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--background);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
-    .shell{width:min(1160px,calc(100% - 40px));margin:auto}.header{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:900;letter-spacing:-.055em;font-size:18px}.nav{display:flex;gap:28px;font-size:13px;font-weight:700;color:var(--muted)}.nav a:hover{color:var(--text)}
-    .hero{min-height:calc(100vh - 76px);display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:72px;padding:54px 0 76px}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--primary-dark);margin-bottom:18px}.hero h1{font-size:clamp(54px,7.1vw,98px);line-height:.86;letter-spacing:-.075em;margin:0 0 26px;max-width:720px}.hero-copy{font-size:19px;line-height:1.5;max-width:480px;margin:0 0 36px;color:#44403C}.tagline{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:15px}
-    .budget-wrap{max-width:500px}.budget-label{display:block;font-size:13px;font-weight:900;margin-bottom:10px}.input-row{display:flex;align-items:center;background:var(--white);border:2px solid var(--text);height:72px;border-radius:14px;overflow:hidden}.currency{font-size:27px;font-weight:900;padding-left:22px}.budget-input{border:0;outline:0;width:100%;height:100%;font-size:34px;font-weight:900;color:var(--text);padding:0 18px;background:transparent}.input-row:focus-within{box-shadow:0 0 0 4px var(--light)}.quick{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}.quick button{background:transparent;border:1px solid #D6D3D1;border-radius:8px;padding:9px 13px;font-size:13px;font-weight:800;color:#57534E;transition:.2s}.quick button:hover,.quick button.active{border-color:var(--primary);background:#FFEDD5;color:var(--primary-dark)}.pick{width:100%;height:58px;border:0;border-radius:10px;background:var(--primary);color:white;font-size:14px;font-weight:950;letter-spacing:.07em}.pick:hover{background:var(--primary-dark)}.pick:focus-visible,.secondary:focus-visible,.quick button:focus-visible{outline:3px solid #1C1917;outline-offset:3px}.error{min-height:20px;color:#B91C1C;font-size:13px;font-weight:700;margin-top:8px}
-    .photo-frame{height:600px;border-radius:28px;overflow:hidden;position:relative;background:#D6D3D1}.photo-frame img{width:100%;height:100%;object-fit:cover;display:block}.photo-label{position:absolute;left:20px;bottom:20px;background:var(--white);padding:11px 14px;border-radius:8px;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
-    .result-section{display:none;padding:40px 0 100px}.result-section.show{display:block}.result-kicker{font-size:12px;font-weight:950;letter-spacing:.15em;color:var(--primary-dark);margin-bottom:14px}.result-layout{display:grid;grid-template-columns:1fr 1fr;background:var(--white);border-radius:24px;overflow:hidden;border:1px solid #E7E5E4}.result-image{min-height:560px;background:#E7E5E4}.result-image img{width:100%;height:100%;object-fit:cover;display:block}.result-info{padding:54px 52px;display:flex;flex-direction:column}.restaurant{font-size:clamp(38px,5vw,68px);line-height:.9;letter-spacing:-.06em;font-weight:950;margin:0 0 22px}.order{font-size:17px;line-height:1.65;margin:0 0 25px;color:#44403C}.total{font-size:52px;line-height:1;font-weight:950;letter-spacing:-.055em;margin-bottom:32px}.breakdown{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:24px}.money-row{display:flex;justify-content:space-between;gap:20px;padding:7px 0;font-size:14px;font-weight:800}.money-row strong{font-size:16px}.money-row.remaining strong{color:var(--success)}.why-label{font-size:11px;font-weight:950;letter-spacing:.13em;color:var(--muted);margin-bottom:7px}.why{margin:0 0 30px;font-size:16px;line-height:1.5}.actions{display:flex;gap:10px;margin-top:auto}.secondary{border:1px solid #A8A29E;background:transparent;border-radius:9px;padding:13px 17px;font-size:12px;font-weight:900;letter-spacing:.05em}.secondary:hover{background:#F5F5F4}.note{font-size:11px;color:var(--muted);margin-top:16px}
-    .options{padding-top:72px}.options h2{font-size:36px;letter-spacing:-.05em;margin:0 0 24px}.option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.option{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}.option-img{height:190px;background:#E7E5E4}.option-img img{width:100%;height:100%;object-fit:cover;display:block}.option-body{padding:20px}.option h3{font-size:25px;letter-spacing:-.04em;margin:0 0 8px}.option p{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.5}.option-price{font-size:27px;font-weight:950}.option .secondary{margin-top:15px;width:100%}
-    .how{padding:80px 0 110px;border-top:1px solid var(--line);margin-top:70px}.how-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px}.how h2{font-size:44px;letter-spacing:-.06em;line-height:.95;margin:0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}.step-number{font-size:12px;font-weight:950;color:var(--primary-dark);margin-bottom:22px}.step h3{font-size:22px;margin:0 0 8px;letter-spacing:-.03em}.step p{font-size:14px;line-height:1.6;color:var(--muted);margin:0}.footer{border-top:1px solid var(--line);padding:24px 0 40px;display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.footer strong{color:var(--text)}
-    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:36px;min-height:auto;padding-top:35px}.hero h1{max-width:650px}.photo-frame{height:420px;order:2}.result-layout{grid-template-columns:1fr}.result-image{min-height:380px}.result-info{padding:40px}.how-grid{grid-template-columns:1fr;gap:40px}}
-    @media(max-width:620px){.shell{width:min(100% - 28px,1160px)}.header{height:64px}.nav{display:none}.hero{padding:30px 0 50px;gap:30px}.eyebrow{margin-bottom:13px}.hero h1{font-size:clamp(51px,17vw,76px);margin-bottom:20px}.hero-copy{font-size:17px;margin-bottom:27px}.input-row{height:64px}.currency{font-size:24px;padding-left:17px}.budget-input{font-size:29px;padding:0 12px}.quick{gap:6px}.quick button{flex:1 0 calc(33.333% - 6px);padding:9px 7px}.pick{height:56px}.photo-frame{height:270px;border-radius:18px}.photo-label{left:12px;bottom:12px}.result-section{padding:25px 0 70px}.result-layout{border-radius:18px}.result-image{min-height:280px}.result-info{padding:28px 22px}.restaurant{font-size:48px}.total{font-size:43px}.actions{flex-direction:column}.secondary{width:100%;height:46px}.options{padding-top:52px}.option-grid{grid-template-columns:1fr}.how{padding:60px 0 70px;margin-top:50px}.how h2{font-size:39px}.steps{grid-template-columns:1fr;gap:28px}.footer{display:block}.footer span{display:block;margin-bottom:7px}}
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Your Kain Pick — set the budget, get a Filipino food pick.">
+<title>Your Kain Pick — Pick your kain</title>
+<style>
+:root{--o:#F97316;--od:#EA580C;--bg:#FFF7ED;--w:#fff;--t:#1C1917;--m:#78716C;--g:#16A34A;--l:#FED7AA;--line:#E7E5E4}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--t);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.shell{width:min(1160px,calc(100% - 40px));margin:auto}.header{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:18px;font-weight:950;letter-spacing:-.055em}.nav{display:flex;gap:28px;color:var(--m);font-size:13px;font-weight:750}.nav a:hover{color:var(--t)}
+.hero{min-height:calc(100vh - 76px);display:flex;align-items:center;padding:55px 0 90px}.hero-inner{max-width:760px}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--od);margin-bottom:18px}.hero h1{font-size:clamp(58px,8vw,108px);line-height:.84;letter-spacing:-.08em;margin:0 0 25px}.hero-copy{font-size:19px;line-height:1.5;color:#44403C;max-width:470px;margin:0 0 36px}.budget-wrap{max-width:500px}.budget-label{display:block;font-size:13px;font-weight:900;margin-bottom:10px}.input-row{height:72px;display:flex;align-items:center;background:var(--w);border:2px solid var(--t);border-radius:14px;overflow:hidden}.currency{padding-left:22px;font-size:27px;font-weight:900}.budget-input{width:100%;height:100%;padding:0 18px;border:0;outline:0;background:transparent;color:var(--t);font-size:34px;font-weight:900}.input-row:focus-within{box-shadow:0 0 0 4px var(--l)}.quick{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}.quick button{border:1px solid #D6D3D1;border-radius:8px;background:transparent;color:#57534E;padding:9px 13px;font-size:13px;font-weight:800}.quick button:hover,.quick button.active{border-color:var(--o);background:#FFEDD5;color:var(--od)}.pick{width:100%;height:58px;border:0;border-radius:10px;background:var(--o);color:#fff;font-size:14px;font-weight:950;letter-spacing:.07em}.pick:hover{background:var(--od)}.pick:disabled{opacity:.75;cursor:wait}.pick:focus-visible,.secondary:focus-visible,.quick button:focus-visible{outline:3px solid var(--t);outline-offset:3px}.error{min-height:20px;color:#B91C1C;font-size:13px;font-weight:700;margin-top:8px}.tagline{margin-top:15px;color:var(--m);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.result-section{display:none;padding:35px 0 100px}.result-section.show{display:block}.result-kicker{font-size:12px;font-weight:950;letter-spacing:.15em;color:var(--od);margin-bottom:14px}.result-layout{background:var(--w);border:1px solid var(--line);border-radius:24px;padding:54px 52px}.restaurant{font-size:clamp(44px,6vw,76px);line-height:.88;letter-spacing:-.065em;font-weight:950;margin:0 0 22px}.order{font-size:18px;line-height:1.65;color:#44403C;margin:0 0 25px;max-width:560px}.total{font-size:56px;line-height:1;font-weight:950;letter-spacing:-.055em;margin-bottom:32px}.breakdown{max-width:600px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0;margin-bottom:24px}.money-row{display:flex;justify-content:space-between;padding:7px 0;font-size:14px;font-weight:800}.money-row strong{font-size:16px}.remaining strong{color:var(--g)}.why-label{font-size:11px;font-weight:950;letter-spacing:.13em;color:var(--m);margin-bottom:7px}.why{font-size:16px;line-height:1.5;margin:0 0 30px;max-width:600px}.actions{display:flex;gap:10px}.secondary{border:1px solid #A8A29E;background:transparent;border-radius:9px;padding:13px 17px;font-size:12px;font-weight:900;letter-spacing:.05em}.secondary:hover{background:#F5F5F4}.note{font-size:11px;color:var(--m);margin-top:16px}
+.options{padding-top:70px}.options h2{font-size:36px;letter-spacing:-.05em;margin:0 0 24px}.option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.option{background:var(--w);border:1px solid var(--line);border-radius:16px;padding:20px}.option h3{font-size:26px;letter-spacing:-.04em;margin:0 0 8px}.option p{font-size:13px;line-height:1.5;color:var(--m);margin:0 0 18px}.option-price{font-size:28px;font-weight:950}.option .secondary{width:100%;margin-top:15px}
+.how{padding:80px 0 110px;border-top:1px solid var(--line);margin-top:70px}.how-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px}.how h2{font-size:46px;line-height:.94;letter-spacing:-.06em;margin:0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}.step-number{font-size:12px;font-weight:950;color:var(--od);margin-bottom:20px}.step h3{font-size:22px;letter-spacing:-.03em;margin:0 0 8px}.step p{font-size:14px;line-height:1.6;color:var(--m);margin:0}.footer{border-top:1px solid var(--line);padding:24px 0 40px;display:flex;justify-content:space-between;color:var(--m);font-size:11px}.footer strong{color:var(--t)}
+@media(max-width:700px){.shell{width:calc(100% - 28px)}.header{height:64px}.nav{display:none}.hero{min-height:auto;padding:35px 0 70px}.hero h1{font-size:clamp(55px,17vw,80px)}.hero-copy{font-size:17px}.input-row{height:64px}.currency{font-size:24px;padding-left:17px}.budget-input{font-size:29px;padding:0 12px}.quick{gap:6px}.quick button{flex:1 0 calc(33.333% - 6px);padding:9px 7px}.result-section{padding:25px 0 70px}.result-layout{border-radius:18px;padding:30px 22px}.restaurant{font-size:49px}.total{font-size:44px}.actions{flex-direction:column}.secondary{width:100%;height:46px}.option-grid{grid-template-columns:1fr}.how{padding:60px 0 70px;margin-top:50px}.how-grid{grid-template-columns:1fr;gap:40px}.steps{grid-template-columns:1fr;gap:28px}.footer{display:block}.footer span{display:block;margin-bottom:7px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
 <body>
-  <header class="shell header">
-    <a class="brand" href="#top" aria-label="Your Kain Pick home">YOUR KAIN PICK</a>
-    <nav class="nav" aria-label="Primary"><a href="#top">Home</a><a href="#how">How It Works</a><a href="#about">About</a></nav>
-  </header>
-
-  <main id="top">
-    <section class="shell hero" aria-labelledby="hero-title">
-      <div>
-        <div class="eyebrow">Filipino food randomizer</div>
-        <h1 id="hero-title">WAG KA NANG MAG-ISIP.</h1>
-        <p class="hero-copy">Sabihin mo lang magkano. Kami na bahala.</p>
-        <div class="budget-wrap">
-          <label class="budget-label" for="budget">Magkano budget mo?</label>
-          <div class="input-row"><span class="currency" aria-hidden="true">₱</span><input id="budget" class="budget-input" inputmode="numeric" type="number" min="50" max="5000" step="10" value="500" aria-describedby="error"></div>
-          <div class="quick" aria-label="Quick budget choices">
-            <button type="button" data-budget="100">₱100</button><button type="button" data-budget="250">₱250</button><button type="button" data-budget="500" class="active">₱500</button><button type="button" data-budget="1000">₱1,000</button><button type="button" data-budget="2000">₱2,000</button><button type="button" data-budget="5000">₱5,000</button>
-          </div>
-          <button class="pick" id="pick" type="button">PICK MY KAIN</button>
-          <div class="error" id="error" role="alert" aria-live="polite"></div>
-          <div class="tagline">You set the budget. We pick the food.</div>
-        </div>
-      </div>
-      <figure class="photo-frame" aria-label="Filipino food photography">
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85" alt="A warm restaurant table with food ready to eat">
-        <figcaption class="photo-label">Tama na. Kami na bahala.</figcaption>
-      </figure>
-    </section>
-
-    <section class="result-section shell" id="result" aria-live="polite" aria-labelledby="result-title">
-      <div class="result-kicker">YOUR KAIN PICK</div>
-      <div class="result-layout">
-        <div class="result-image"><img id="resultImage" alt="Selected food"></div>
-        <div class="result-info">
-          <h2 class="restaurant" id="result-title"></h2>
-          <p class="order" id="resultOrder"></p>
-          <div class="total" id="resultTotal"></div>
-          <div class="breakdown">
-            <div class="money-row"><span>BUDGET</span><strong id="resultBudget"></strong></div>
-            <div class="money-row"><span>KAIN</span><strong id="resultMeal"></strong></div>
-            <div class="money-row remaining"><span>SUKLI</span><strong id="resultRemaining"></strong></div>
-          </div>
-          <div class="why-label">BAKIT ITO?</div>
-          <p class="why" id="resultWhy"></p>
-          <div class="actions"><button class="secondary" id="roll" type="button">ROLL AGAIN</button><button class="secondary" id="change" type="button">CHANGE BUDGET</button></div>
-          <div class="note">Prices may vary by restaurant location and availability.</div>
-        </div>
-      </div>
-      <div class="options" id="optionsWrap" hidden>
-        <h2>YOUR KAIN PICKS</h2>
-        <div class="option-grid" id="options"></div>
-      </div>
-    </section>
-
-    <section class="shell how" id="how">
-      <div class="how-grid">
-        <h2>Budget.<br>Pick.<br>Kain.</h2>
-        <div class="steps">
-          <div class="step"><div class="step-number">01</div><h3>Set your budget</h3><p>Start with what you actually want to spend. ₱50 to ₱5,000.</p></div>
-          <div class="step"><div class="step-number">02</div><h3>We pick</h3><p>We choose a restaurant and build a realistic order that stays within budget.</p></div>
-          <div class="step"><div class="step-number">03</div><h3>Time to kain</h3><p>No more “anong kakainin?” Just a pick that fits.</p></div>
-        </div>
-      </div>
-    </section>
-  </main>
-  <footer class="shell footer" id="about"><span><strong>YOUR KAIN PICK</strong> — Filipino food, one decision easier.</span><span>Prices are approximate. No ordering or checkout.</span></footer>
-
-  <script>
-    const foodImages={
-      chicken:'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=82',
-      burger:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=82',
-      pizza:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1000&q=82',
-      rice:'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1000&q=82',
-      noodles:'https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=1000&q=82',
-      meal:'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=82'
-    };
-    const restaurants=[
-      {name:'Jollibee',type:'Chicken & rice',img:foodImages.chicken,orders:[['Chickenjoy + rice + drink',155],['2-pc Chickenjoy + rice',245],['Chickenjoy + spaghetti + drink',210],['6-pc Chickenjoy family meal',760],['8-pc Chickenjoy family meal',980]]},
-      {name:"McDonald's",type:'Burgers & meals',img:foodImages.burger,orders:[['Cheeseburger + fries + drink',190],['2-pc Chicken McDo + rice + drink',235],['Big Mac + fries + drink',320],['4-pc Chicken McDo family meal',720],['6-pc Chicken McDo family meal',980]]},
-      {name:'KFC',type:'Chicken meals',img:foodImages.chicken,orders:[['1-pc Chicken + rice + drink',185],['2-pc Chicken + rice + drink',295],['Chicken Sandwich + fries + drink',275],['6-pc Chicken bucket + sides',890],['8-pc Chicken bucket + sides',1180]]},
-      {name:'Mang Inasal',type:'Inasal & rice',img:foodImages.rice,orders:[['Chicken Inasal + rice + drink',175],['PM2 Chicken Inasal + rice + drink',240],['2-pc Chicken Inasal + rice',295],['Family Fiesta meal',850],['Large family chicken meal',1190]]},
-      {name:'Chowking',type:'Chinese-Filipino',img:foodImages.noodles,orders:[['Siomai + rice + drink',155],['Chix & Sauce + rice + drink',205],['Pancit + siomai + drink',270],['Family pancit + chicken',760],['Family chao fan + chicken',1050]]},
-      {name:'Greenwich',type:'Pizza & pasta',img:foodImages.pizza,orders:[['Solo pizza + drink',190],['Pizza + fries + drinks',390],['Pizza + pasta + drinks',520],['Family pizza + pasta + sides',1050],['Two-pizza sharing set',1420]]},
-      {name:'Burger King',type:'Burgers',img:foodImages.burger,orders:[['Whopper Jr. meal',210],['Whopper meal',330],['2 burger meals',520],['4 burger meals',980],['Family burger set',1320]]},
-      {name:"Wendy's",type:'Burgers & chicken',img:foodImages.burger,orders:[['Jr. Cheeseburger meal',220],['Baconator meal',390],['2 burger meals',620],['Family burger set',1120]]},
-      {name:'Popeyes',type:'Chicken',img:foodImages.chicken,orders:[['1-pc Chicken + biscuit + drink',220],['2-pc Chicken + rice + drink',320],['Chicken sandwich meal',330],['Family chicken meal',1120],['8-pc chicken set',1380]]},
-      {name:'Bonchon',type:'Korean chicken',img:foodImages.chicken,orders:[['Chicken ricebox + drink',230],['2-pc chicken + rice',320],['Chicken wings + rice + drink',390],['Family chicken set',1080],['Large sharing set',1420]]},
-      {name:"Shakey's",type:'Pizza & sharing',img:foodImages.pizza,orders:[['Solo pizza + drink',230],['Pizza + fries + drink',450],['Pizza + pasta',650],['Family pizza + sides',1180],['Large pizza sharing set',1490]]},
-      {name:'Army Navy',type:'Burgers & burritos',img:foodImages.burger,orders:[['Burger + fries + drink',350],['Burrito + fries + drink',390],['2 burger meals',720],['Family burger set',1350]]},
-      {name:'Potato Corner',type:'Fries & snacks',img:foodImages.meal,orders:[['Large flavored fries + drink',190],['2 large fries + drinks',360],['Fries sharing set',520],['Party fries set',850]]},
-      {name:'Pizza Hut',type:'Pizza & pasta',img:foodImages.pizza,orders:[['Personal pizza + drink',230],['Pizza + pasta',560],['2-pizza family set',1050],['Family feast',1450]]},
-      {name:'Yellow Cab',type:'Pizza',img:foodImages.pizza,orders:[['Regular pizza + drink',320],['Pizza + pasta',650],['Family pizza + sides',1180],['Two-pizza sharing set',1490]]},
-      {name:'Tokyo Tokyo',type:'Japanese-Filipino',img:foodImages.rice,orders:[['Chicken teriyaki + rice + drink',210],['Beef yakiniku + rice + drink',290],['2 rice meals + sides',540],['Family bento set',1180]]},
-      {name:"Max's",type:'Chicken & Filipino meals',img:foodImages.chicken,orders:[['Fried chicken + rice + drink',260],['Chicken + rice + side',340],['2 rice meals + sides',620],['Family chicken meal',1250]]},
-      {name:'Tapa King',type:'Silog meals',img:foodImages.rice,orders:[['Tapsilog + drink',220],['Bangsilog + drink',230],['2 silog meals + drinks',450],['Family silog set',980]]},
-      {name:"Kenny Rogers",type:'Roast chicken',img:foodImages.chicken,orders:[['Solo roast chicken meal',270],['Roast chicken + 2 sides',360],['2 roast meals + sides',720],['Family roast chicken meal',1290]]},
-      {name:'Classic Savory',type:'Chinese-Filipino',img:foodImages.noodles,orders:[['Chicken + rice + drink',260],['Chopsuey + rice',320],['2 rice meals + noodles',610],['Family chicken + noodles',1250]]}
-    ];
-    const budgetInput=document.getElementById('budget'), error=document.getElementById('error'), result=document.getElementById('result'), pick=document.getElementById('pick');
-    let lastRestaurant='',lastOrder='',currentBudget=500,currentResult=null;
-    const money=n=>'₱'+Math.round(n).toLocaleString('en-PH');
-    function validateBudget(){const raw=budgetInput.value.trim(),n=Number(raw);if(!raw||!Number.isFinite(n)){error.textContent='Enter a valid budget.';return null}if(n<50){error.textContent='Minimum budget is ₱50.';return null}if(n>5000){error.textContent='Maximum budget is ₱5,000.';return null}error.textContent='';return n}
-    function selectRestaurant(candidates){return candidates[Math.floor(Math.random()*candidates.length)]}
-    function generateOrder(restaurant,budget){const valid=restaurant.orders.filter(o=>o[1]<=budget&&!(restaurant.name===lastRestaurant&&o[0]===lastOrder));return valid.length?valid[Math.floor(Math.random()*valid.length)]:null}
-    function makeResult(budget,exclude=[]){let pool=restaurants.filter(r=>!exclude.includes(r.name));for(let i=0;i<restaurants.length*2;i++){if(!pool.length)pool=restaurants;const r=selectRestaurant(pool);const order=generateOrder(r,budget);if(order)return {restaurant:r,order:order[0],total:order[1],remaining:budget-order[1]};pool=pool.filter(x=>x!==r)}return null}
-    function reasonFor(total,budget,type){const remaining=budget-total;if(remaining===0)return 'Sakto. Walang pilit, walang sobra.';if(remaining<75)return 'Pasok sa budget. Halos eksakto.';if(type.toLowerCase().includes('chicken'))return 'Pasok sa budget. May pang-chicken ka na.';return `Sakto sa budget mo. May ${money(remaining)} ka pang sukli.`}
-    function renderResult(data,budget){currentResult=data;currentBudget=budget;lastRestaurant=data.restaurant.name;lastOrder=data.order;document.getElementById('result-title').textContent=data.restaurant.name;document.getElementById('resultOrder').textContent=data.order;document.getElementById('resultTotal').textContent=money(data.total);document.getElementById('resultBudget').textContent=money(budget);document.getElementById('resultMeal').textContent=money(data.total);document.getElementById('resultRemaining').textContent=money(data.remaining);document.getElementById('resultWhy').textContent=reasonFor(data.total,budget,data.restaurant.type);const im=document.getElementById('resultImage');im.src=data.restaurant.img;im.alt=`${data.restaurant.name} ${data.order}`;result.classList.add('show');document.getElementById('optionsWrap').hidden=true;result.scrollIntoView({behavior:'smooth',block:'start'})}
-    function generateOptions(budget){const count=budget>=5000?5:budget>=3000?4:3;const chosen=[];let pool=[...restaurants];while(chosen.length<count&&pool.length){const r=selectRestaurant(pool);const order=generateOrder(r,budget);if(order)chosen.push({restaurant:r,order:order[0],total:order[1],remaining:budget-order[1]});pool=pool.filter(x=>x!==r)}return chosen}
-    function renderOptions(options,budget){const wrap=document.getElementById('optionsWrap'),grid=document.getElementById('options');grid.innerHTML='';options.forEach((d,i)=>{const card=document.createElement('article');card.className='option';card.innerHTML=`<div class="option-img"><img src="${d.restaurant.img}" alt="${d.restaurant.name} ${d.order}"></div><div class="option-body"><h3>${d.restaurant.name}</h3><p>${d.order}</p><div class="option-price">${money(d.total)}</div><button class="secondary" type="button">VIEW PICK</button></div>`;card.querySelector('button').addEventListener('click',()=>renderResult(d,budget));grid.appendChild(card)});wrap.hidden=false}
-    function randomize(budget){pick.disabled=true;pick.textContent='PICKING...';const names=restaurants.map(r=>r.name);let i=0;const timer=setInterval(()=>{pick.textContent=names[i++%names.length];},130);setTimeout(()=>{clearInterval(timer);pick.disabled=false;pick.textContent='PICK MY KAIN';const data=makeResult(budget);if(!data){error.textContent="That budget is a little tight. Let's try another pick.";return}renderResult(data,budget);if(budget>=1500)renderOptions(generateOptions(budget),budget)},1250)}
-    pick.addEventListener('click',()=>{const b=validateBudget();if(b!==null)randomize(b)});
-    budgetInput.addEventListener('input',()=>{document.querySelectorAll('[data-budget]').forEach(x=>x.classList.toggle('active',Number(x.dataset.budget)===Number(budgetInput.value)));error.textContent=''})
-    document.querySelectorAll('[data-budget]').forEach(btn=>btn.addEventListener('click',()=>{budgetInput.value=btn.dataset.budget;document.querySelectorAll('[data-budget]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');error.textContent='';budgetInput.focus()}));
-    document.getElementById('roll').addEventListener('click',()=>{const b=validateBudget();if(b!==null)randomize(b)});
-    document.getElementById('change').addEventListener('click',()=>{budgetInput.focus();window.scrollTo({top:0,behavior:'smooth'})});
-  </script>
-</body>
-</html>
+<header class="shell header"><a class="brand" href="#top">YOUR KAIN PICK</a><nav class="nav"><a href="#top">Home</a><a href="#how">How It Works</a><a href="#about">About</a></nav></header>
+<main id="top">
+<section class="shell hero"><div class="hero-inner"><div class="eyebrow">Filipino food randomizer</div><h1>WAG KA NANG MAG-ISIP.</h1><p class="hero-copy">Sabihin mo lang magkano. Kami na bahala.</p><div class="budget-wrap"><label class="budget-label" for="budget">Magkano budget mo?</label><div class="input-row"><span class="currency">₱</span><input id="budget" class="budget-input" inputmode="numeric" type="number" min="50" max="5000" step="10" value="500"></div><div class="quick"><button type="button" data-budget="100">₱100</button><button type="button" data-budget="250">₱250</button><button type="button" data-budget="500" class="active">₱500</button><button type="button" data-budget="1000">₱1,000</button><button type="button" data-budget="2000">₱2,000</button><button type="button" data-budget="5000">₱5,000</button></div><button class="pick" id="pick" type="button">PICK MY KAIN</button><div class="error" id="error" role="alert"></div><div class="tagline">You set the budget. We pick the food.</div></div></div></section>
+<section class="result-section shell" id="result" aria-live="polite"><div class="result-kicker">YOUR KAIN PICK</div><div class="result-layout"><h2 class="restaurant" id="result-title"></h2><p class="order" id="resultOrder"></p><div class="total" id="resultTotal"></div><div class="breakdown"><div class="money-row"><span>BUDGET</span><strong id="resultBudget"></strong></div><div class="money-row"><span>KAIN</span><strong id="resultMeal"></strong></div><div class="money-row remaining"><span>SUKLI</span><strong id="resultRemaining"></strong></div></div><div class="why-label">BAKIT ITO?</div><p class="why" id="resultWhy"></p><div class="actions"><button class="secondary" id="roll" type="button">ROLL AGAIN</button><button class="secondary" id="change" type="button">CHANGE BUDGET</button></div><div class="note">Prices may vary by restaurant location and availability.</div></div><div class="options" id="optionsWrap" hidden><h2>YOUR KAIN PICKS</h2><div class="option-grid" id="options"></div></div></section>
+<section class="shell how" id="how"><div class="how-grid"><h2>Budget.<br>Pick.<br>Kain.</h2><div class="steps"><div class="step"><div class="step-number">01</div><h3>Set your budget</h3><p>Start with what you actually want to spend. ₱50 to ₱5,000.</p></div><div class="step"><div class="step-number">02</div><h3>We pick</h3><p>We choose a restaurant and build a realistic order that stays within budget.</p></div><div class="step"><div class="step-number">03</div><h3>Time to kain</h3><p>No more “anong kakainin?” Just a pick that fits.</p></div></div></div></section>
+</main><footer class="shell footer" id="about"><span><strong>YOUR KAIN PICK</strong> — Filipino food, one decision easier.</span><span>Prices are approximate. No ordering or checkout.</span></footer>
+<script>
+const restaurants=[
+{name:'Jollibee',orders:[['Chickenjoy + rice + drink',155],['2-pc Chickenjoy + rice',245],['Chickenjoy + spaghetti + drink',210],['6-pc Chickenjoy family meal',760],['8-pc Chickenjoy family meal',980]]},
+{name:"McDonald's",orders:[['Cheeseburger + fries + drink',190],['2-pc Chicken McDo + rice + drink',235],['Big Mac + fries + drink',320],['4-pc Chicken McDo family meal',720],['6-pc Chicken McDo family meal',980]]},
+{name:'KFC',orders:[['1-pc Chicken + rice + drink',185],['2-pc Chicken + rice + drink',295],['Chicken Sandwich + fries + drink',275],['6-pc Chicken bucket + sides',890],['8-pc Chicken bucket + sides',1180]]},
+{name:'Mang Inasal',orders:[['Chicken Inasal + rice + drink',175],['PM2 Chicken Inasal + rice + drink',240],['2-pc Chicken Inasal + rice',295],['Family Fiesta meal',850],['Large family chicken meal',1190]]},
+{name:'Chowking',orders:[['Siomai + rice + drink',155],['Chix & Sauce + rice + drink',205],['Pancit + siomai + drink',270],['Family pancit + chicken',760],['Family chao fan + chicken',1050]]},
+{name:'Greenwich',orders:[['Solo pizza + drink',190],['Pizza + fries + drinks',390],['Pizza + pasta + drinks',520],['Family pizza + pasta + sides',1050],['Two-pizza sharing set',1420]]},
+{name:'Burger King',orders:[['Whopper Jr. meal',210],['Whopper meal',330],['2 burger meals',520],['4 burger meals',980],['Family burger set',1320]]},
+{name:"Wendy's",orders:[['Jr. Cheeseburger meal',220],['Baconator meal',390],['2 burger meals',620],['Family burger set',1120]]},
+{name:'Popeyes',orders:[['1-pc Chicken + biscuit + drink',220],['2-pc Chicken + rice + drink',320],['Chicken sandwich meal',330],['Family chicken meal',1120],['8-pc chicken set',1380]]},
+{name:'Bonchon',orders:[['Chicken ricebox + drink',230],['2-pc chicken + rice',320],['Chicken wings + rice + drink',390],['Family chicken set',1080],['Large sharing set',1420]]},
+{name:"Shakey's",orders:[['Solo pizza + drink',230],['Pizza + fries + drink',450],['Pizza + pasta',650],['Family pizza + sides',1180],['Large pizza sharing set',1490]]},
+{name:'Army Navy',orders:[['Burger + fries + drink',350],['Burrito + fries + drink',390],['2 burger meals',720],['Family burger set',1350]]},
+{name:'Potato Corner',orders:[['Large flavored fries + drink',190],['2 large fries + drinks',360],['Fries sharing set',520],['Party fries set',850]]},
+{name:'Pizza Hut',orders:[['Personal pizza + drink',230],['Pizza + pasta',560],['2-pizza family set',1050],['Family feast',1450]]},
+{name:'Yellow Cab',orders:[['Regular pizza + drink',320],['Pizza + pasta',650],['Family pizza + sides',1180],['Two-pizza sharing set',1490]]},
+{name:'Tokyo Tokyo',orders:[['Chicken teriyaki + rice + drink',210],['Beef yakiniku + rice + drink',290],['2 rice meals + sides',540],['Family bento set',1180]]},
+{name:"Max's",orders:[['Fried chicken + rice + drink',260],['Chicken + rice + side',340],['2 rice meals + sides',620],['Family chicken meal',1250]]},
+{name:'Tapa King',orders:[['Tapsilog + drink',220],['Bangsilog + drink',230],['2 silog meals + drinks',450],['Family silog set',980]]},
+{name:'Kenny Rogers',orders:[['Solo roast chicken meal',270],['Roast chicken + 2 sides',360],['2 roast meals + sides',720],['Family roast chicken meal',1290]]},
+{name:'Classic Savory',orders:[['Chicken + rice + drink',260],['Chopsuey + rice',320],['2 rice meals + noodles',610],['Family chicken + noodles',1250]]}];
+const input=document.getElementById('budget'),error=document.getElementById('error'),result=document.getElementById('result'),pick=document.getElementById('pick');let last='';const money=n=>'₱'+Math.round(n).toLocaleString('en-PH');
+function validateBudget(){const n=Number(input.value);if(!input.value.trim()||!Number.isFinite(n)){error.textContent='Enter a valid budget.';return null}if(n<50){error.textContent='Minimum budget is ₱50.';return null}if(n>5000){error.textContent='Maximum budget is ₱5,000.';return null}error.textContent='';return n}
+function makePick(budget,exclude=''){let pool=restaurants.filter(r=>r.name!==exclude&&r.orders.some(o=>o[1]<=budget));if(!pool.length)pool=restaurants.filter(r=>r.orders.some(o=>o[1]<=budget));if(!pool.length)return null;const r=pool[Math.floor(Math.random()*pool.length)],valid=r.orders.filter(o=>o[1]<=budget);const o=valid[Math.floor(Math.random()*valid.length)];return{r,o,total:o[1],remaining:budget-o[1]}}
+function show(data,budget){last=data.r.name;document.getElementById('result-title').textContent=data.r.name;document.getElementById('resultOrder').textContent=data.o[0];document.getElementById('resultTotal').textContent=money(data.total);document.getElementById('resultBudget').textContent=money(budget);document.getElementById('resultMeal').textContent=money(data.total);document.getElementById('resultRemaining').textContent=money(data.remaining);document.getElementById('resultWhy').textContent=data.remaining===0?'Sakto. Walang pilit, walang sobra.':`Sakto sa budget mo. May ${money(data.remaining)} ka pang sukli.`;result.classList.add('show');result.scrollIntoView({behavior:'smooth',block:'start'})}
+function options(budget){const count=budget>=5000?5:budget>=3000?4:3,pool=[...restaurants],out=[];while(out.length<count&&pool.length){const r=pool.splice(Math.floor(Math.random()*pool.length),1)[0],valid=r.orders.filter(o=>o[1]<=budget);if(valid.length){const o=valid[Math.floor(Math.random()*valid.length)];out.push({r,o,total:o[1],remaining:budget-o[1]})}}return out}
+function renderOptions(list,budget){const wrap=document.getElementById('optionsWrap'),grid=document.getElementById('options');grid.innerHTML='';list.forEach(d=>{const card=document.createElement('article');card.className='option';card.innerHTML=`<h3>${d.r.name}</h3><p>${d.o[0]}</p><div class="option-price">${money(d.total)}</div><button class="secondary" type="button">VIEW PICK</button>`;card.querySelector('button').onclick=()=>show(d,budget);grid.appendChild(card)});wrap.hidden=false}
+function run(){const budget=validateBudget();if(budget===null)return;pick.disabled=true;let i=0,timer=setInterval(()=>{pick.textContent=restaurants[i++%restaurants.length].name},120);setTimeout(()=>{clearInterval(timer);pick.disabled=false;pick.textContent='PICK MY KAIN';const data=makePick(budget,last);if(!data){error.textContent="That budget is a little tight. Let's try another pick.";return}show(data,budget);if(budget>=1500)renderOptions(options(budget),budget)},1200)}
+pick.onclick=run;document.getElementById('roll').onclick=run;document.getElementById('change').onclick=()=>{input.focus();window.scrollTo({top:0,behavior:'smooth'})};input.oninput=()=>{document.querySelectorAll('[data-budget]').forEach(b=>b.classList.toggle('active',Number(b.dataset.budget)===Number(input.value)));error.textContent=''};document.querySelectorAll('[data-budget]').forEach(b=>b.onclick=()=>{input.value=b.dataset.budget;document.querySelectorAll('[data-budget]').forEach(x=>x.classList.remove('active'));b.classList.add('active');error.textContent='';input.focus()});
+</script>
+</body></html>
