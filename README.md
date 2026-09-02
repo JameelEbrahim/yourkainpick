@@ -1,10 +1,10 @@
 # Your Kain Pick
 
-A lightweight Filipino food randomizer.
+A lightweight Filipino food randomizer that recommends fast-food meals based on the user's budget.
 
 ## Before Modifying
 
-Before modifying this project, read `PROJECT.md` and the current `index.html`.
+Read `PROJECT.md` and `index.html` before making changes.
 
 ## Structure
 
